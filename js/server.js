@@ -4,10 +4,26 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors({
-  origin: 'https://ecom-js-seven.vercel.app',
-  credentials: true
-}));
+const allowedOrigins = [
+    'http://127.0.0.1:8080',       // your local frontend (dev)
+    'http://localhost:8080',        // sometimes localhost instead of 127.0.0.1
+    'https://ecom-js-seven.vercel.app' // your deployed frontend on Vercel
+  ];
+  
+  app.use(cors({
+    origin: function(origin, callback) {
+      // Allow requests with no origin like mobile apps or curl
+      if (!origin) return callback(null, true);
+  
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true
+  }));
+  
 
 app.use(express.json());
 
