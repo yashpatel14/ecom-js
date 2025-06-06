@@ -6,7 +6,7 @@ async function registerUser() {
     const form = document.getElementById("register-form");
   
     try {
-      const response = await fetch('http://localhost:3000/register', {
+      const response = await fetch('https://api.freeapi.app/api/v1/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         credentials: 'include',
@@ -37,7 +37,7 @@ async function registerUser() {
     const form = document.getElementById("register-form");
   
     try {
-      const response = await fetch('http://localhost:3000/login', {
+      const response = await fetch('https://api.freeapi.app/api/v1/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         credentials: 'include',
@@ -63,7 +63,7 @@ async function registerUser() {
   
   async function checkAuth() {
     try {
-      const res = await fetch('http://localhost:3000/profile', {
+      const res = await fetch('https://api.freeapi.app/api/v1/users/profile', {
         credentials: 'include'
       });
       const data = await res.json();
