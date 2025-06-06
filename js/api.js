@@ -1,4 +1,4 @@
-// Register a new user
+// Register user
 async function registerUser() {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
@@ -7,10 +7,10 @@ async function registerUser() {
     const form = document.getElementById("register-form");
   
     try {
-      const response = await fetch('https://api.freeapi.app/api/v1/users/register', {
+      const response = await fetch('/register', {  // <-- proxy endpoint
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        credentials: 'include',  // Important: send and receive cookies
+        credentials: 'include',
         body: JSON.stringify({ email, password, username })
       });
   
@@ -39,10 +39,10 @@ async function registerUser() {
     const form = document.getElementById("login-form");
   
     try {
-      const response = await fetch('https://api.freeapi.app/api/v1/users/login', {
+      const response = await fetch('/login', {  // <-- proxy endpoint
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        credentials: 'include',  // Important: send and receive cookies
+        credentials: 'include',
         body: JSON.stringify({ email, password })
       });
   
@@ -63,26 +63,24 @@ async function registerUser() {
     }
   }
   
-  // Check if user is authenticated by calling profile endpoint
+  // Check auth
   async function checkAuth() {
     try {
-      const response = await fetch('https://api.freeapi.app/api/v1/users/profile', {
-        credentials: 'include',  // Send cookies with request
+      const response = await fetch('/profile', {  // <-- proxy endpoint
+        credentials: 'include',
       });
+  
       const data = await response.json();
   
       if (data.success) {
         console.log("✅ User is authenticated:", data.user);
-        // Optionally update UI here to show user info
       } else {
         console.log("❌ User not authenticated");
-        // Optionally redirect to login page
       }
     } catch (error) {
       console.error("Error checking auth:", error);
     }
   }
   
-  // Call checkAuth on page load or when needed
   window.addEventListener('load', checkAuth);
   
