@@ -1,0 +1,14 @@
+{
+    "functions": {
+      "api/index.js": {
+        "memory": 128,
+        "maxDuration": 10
+      }
+    },
+    "rewrites": [
+      { "source": "/register", "destination": "/api" },
+      { "source": "/login", "destination": "/api" },
+      { "source": "/profile", "destination": "/api" }
+    ]
+  }
+  
